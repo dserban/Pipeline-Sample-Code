@@ -24,5 +24,5 @@ gsutil cp ${DEST_GCS_AVRO_FILE} /opt/landing/
 echo ${DEST_GCS_AVRO_FILE} | grep '^gs://bq_avro_morphl/ga_sessions_.*.avro$' && gsutil rm ${DEST_GCS_AVRO_FILE}
 mv /opt/landing/${GA_SESSIONS_DATA_ID}.avro /opt/landing/${DAY_OF_DATA_CAPTURE}_${WEBSITE_URL}.avro
 hdfs dfs -mkdir -p ${FQ_BQ_AVRO_HDFS_DIR}
-hdfs dfs -copyFromLocal -f /opt/landing/${DAY_OF_DATA_CAPTURE}_${WEBSITE_URL}.avro ${FQ_BQ_AVRO_HDFS_DIR}/${GA_SESSIONS_DATA_ID}.avro
+hdfs dfs -copyFromLocal -f /opt/landing/${DAY_OF_DATA_CAPTURE}_${WEBSITE_URL}.avro ${FQ_BQ_AVRO_HDFS_DIR}/${DAY_OF_DATA_CAPTURE}_${WEBSITE_URL}.avro
 # rm /opt/landing/${DAY_OF_DATA_CAPTURE}_${WEBSITE_URL}.avro
