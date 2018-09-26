@@ -14,6 +14,8 @@ WEBSITE_URL=$(</opt/secrets/website_url.txt)
 gcloud config set project ${GCP_PROJECT_ID}
 gcloud auth activate-service-account --key-file=${KEY_FILE_LOCATION}
 bq ls &>/dev/null
+sed "s/GCP_PROJECT_ID/${GCP_PROJECT_ID}/g;s/SRC_BQ_DATASET/${SRC_BQ_DATASET}/g;s/GA_SESSIONS_DATA_ID/${GA_SESSIONS_DATA_ID}/g;s/WEBSITE_URL/${WEBSITE_URL}/g" /opt/code/bq_extractor/query.sql.template > /opt/code/bq_extractor/query.sql
+bq query --use_legacy_sql=false --destination_table=${DEST_BQ_DATASET}.${GA_SESSIONS_DATA_ID} < /opt/code/bq_extractor/query.sql &>/dev/null
 bq extract --destination_format=AVRO ${SRC_BQ_DATASET}.${GA_SESSIONS_DATA_ID} gs://${DEST_GCS_BUCKET}/${GA_SESSIONS_DATA_ID}.avro
 gsutil cp gs://${DEST_GCS_BUCKET}/${GA_SESSIONS_DATA_ID}.avro /opt/landing/
 hdfs dfs -mkdir -p ${FQ_BQ_AVRO_HDFS_DIR}
