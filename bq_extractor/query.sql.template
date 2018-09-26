@@ -4,7 +4,7 @@ SELECT
   bounces,
   no_hits - page_views AS events,
   session_duration,
-  pageViews AS page_views,
+  page_views,
   IF(device='mobile', 1, 0) AS is_mobile,
   IF(device='desktop', 1, 0) AS is_desktop,
   IF(device='tablet', 1, 0) AS is_tablet,
