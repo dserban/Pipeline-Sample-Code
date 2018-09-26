@@ -21,6 +21,8 @@ bq query --use_legacy_sql=false --destination_table=${DEST_TABLE} < /opt/code/bq
 bq extract --destination_format=AVRO ${DEST_TABLE} ${DEST_GCS_AVRO_FILE}
 echo ${DEST_TABLE} | grep ^bq_avro_morphl.ga_sessions_ && bq rm -f ${DEST_TABLE}
 gsutil cp ${DEST_GCS_AVRO_FILE} /opt/landing/
+echo ${DEST_GCS_AVRO_FILE} | grep '^gs://bq_avro_morphl/ga_sessions_.*.avro$' && gsutil rm ${DEST_GCS_AVRO_FILE}
+mv /opt/landing/${GA_SESSIONS_DATA_ID}.avro /opt/landing/${DAY_OF_DATA_CAPTURE}_${WEBSITE_URL}.avro
 hdfs dfs -mkdir -p ${FQ_BQ_AVRO_HDFS_DIR}
-hdfs dfs -copyFromLocal -f /opt/landing/${GA_SESSIONS_DATA_ID}.avro ${FQ_BQ_AVRO_HDFS_DIR}/${GA_SESSIONS_DATA_ID}.avro
-# rm /opt/landing/${GA_SESSIONS_DATA_ID}.avro
+hdfs dfs -copyFromLocal -f /opt/landing/${DAY_OF_DATA_CAPTURE}_${WEBSITE_URL}.avro ${FQ_BQ_AVRO_HDFS_DIR}/${GA_SESSIONS_DATA_ID}.avro
+# rm /opt/landing/${DAY_OF_DATA_CAPTURE}_${WEBSITE_URL}.avro
