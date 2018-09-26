@@ -1,15 +1,14 @@
 SELECT
-  clientId,
+  clientId AS client_id,
   sessions,
   bounces,
   noHits - pageViews as events,
-  sessionDuration,
-  pageViews,
-  IF(device='mobile', 1, 0) isMobile,
-  IF(device='desktop', 1, 0) isDesktop,
-  IF(device='tablet', 1, 0) isTablet,
+  sessionDuration AS session_duration,
+  pageViews AS page_views,
+  IF(device='mobile', 1, 0) isMobile AS is_mobile,
+  IF(device='desktop', 1, 0) isDesktop AS is_desktop,
+  IF(device='tablet', 1, 0) isTablet AS is_tablet,
   IF(session_dates[SAFE_OFFSET(0)] IS NULL, 0, DATE_DIFF(CURRENT_DATE(), PARSE_DATE("%Y%m%d", session_dates[SAFE_OFFSET(0)]), DAY) ) days_since_last_session,
-  session_dates
 FROM(
   SELECT
     clientId,
