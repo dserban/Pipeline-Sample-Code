@@ -1,4 +1,4 @@
-# DAY_OF_DATA_CAPTURE=2018-09-18 SRC_BQ_DATASET=92806566 DEST_BQ_DATASET=bq_avro_morphl DEST_GCS_BUCKET=bq_avro_morphl BQ_AVRO_HDFS_DIR=bq_avro docker run --rm --net host -v /opt/secrets:/opt/secrets:ro -v /opt/ga_chp_bq:/opt/ga_chp_bq:ro -v /opt/landing:/opt/landing -e DAY_OF_DATA_CAPTURE -e SRC_BQ_DATASET -e DEST_GCS_BUCKET -e BQ_AVRO_HDFS_DIR -e KEY_FILE_LOCATION -e ENVIRONMENT_TYPE -e MORPHL_SERVER_IP_ADDRESS pysparkcontainer bash /opt/ga_chp_bq/ingestion/bq_extractor/runextractor.sh
+# DAY_OF_DATA_CAPTURE=2018-09-18 SRC_BQ_DATASET=92806566 DEST_BQ_DATASET=bq_avro_morphl DEST_GCS_BUCKET=bq_avro_morphl BQ_AVRO_HDFS_DIR=bq_avro docker run --rm --net host -v /opt/secrets:/opt/secrets:ro -v /opt/ga_chp_bq:/opt/ga_chp_bq:ro -v /opt/landing:/opt/landing -e DAY_OF_DATA_CAPTURE -e SRC_BQ_DATASET -e DEST_BQ_DATASET -e DEST_GCS_BUCKET -e BQ_AVRO_HDFS_DIR -e KEY_FILE_LOCATION -e ENVIRONMENT_TYPE -e MORPHL_SERVER_IP_ADDRESS pysparkcontainer bash /opt/ga_chp_bq/ingestion/bq_extractor/runextractor.sh
 
 cp -r /opt/ga_chp_bq /opt/code
 cd /opt/code
